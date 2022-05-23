@@ -14,3 +14,7 @@
 ### 0.0.4
 
 * Fixed Accessing assets of package itself
+
+### 0.0.5
+
+* Documentation issues
