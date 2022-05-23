@@ -29,4 +29,4 @@ jobs:
       - name: Check Publish Warnings
         run: flutter packages pub publish --dry-run
       - name: Publish Package
-        run: flutter packages pub pubish
+        run: flutter packages pub publish
