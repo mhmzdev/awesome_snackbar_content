@@ -1,5 +1,8 @@
 A package that lets you uplift your SnackBar experience in the app.
 
+<img src="https://user-images.githubusercontent.com/43790152/169776704-cc6ac8d8-ebd7-4cf1-8239-5d4678b65bc4.png" />
+
+
 ## 🛠 Attributes
 - `title`: Top label that will be shown in the body
 - `message`: Body message reflecting some error message, success message etc.
