@@ -6,6 +6,23 @@ A package that lets you uplift your SnackBar experience in the app.
 - `color`: Color of SnackBar body
 - `contentType`: ContentType class reflecting failure, success, help or warning.
 
+## 📱 Usage
+To use the package:
+- add the dependency to your pubspec.yaml file
+
+```yaml
+dependencies:
+  flutter:
+      sdk: flutter
+
+  awesome_snackbar_content:
+```
+
+Then import it in your flutter project:
+```
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+```
+
 ## 👀 Looks
 Below are the looks of various types in package
 
