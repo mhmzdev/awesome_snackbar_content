@@ -1,3 +1,4 @@
+/// path to various SVGs being used from `assets` folder
 class AssetsPath {
   static const String help = 'assets/types/help.svg';
   static const String failure = 'assets/types/failure.svg';
