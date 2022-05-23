@@ -78,6 +78,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                           child: SvgPicture.asset(
                             AssetsPath.failure,
                             height: size.height * 0.022,
+                            package: 'awesome_snackbar_content',
                           ),
                         )
                       ],
@@ -110,6 +111,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
               height: size.height * 0.06,
               width: size.width * 0.05,
               color: hslDark.toColor(),
+              package: 'awesome_snackbar_content',
             ),
           ),
         ),
@@ -123,12 +125,14 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 AssetsPath.back,
                 height: size.height * 0.06,
                 color: hslDark.toColor(),
+                package: 'awesome_snackbar_content',
               ),
               Positioned(
                 top: size.height * 0.015,
                 child: SvgPicture.asset(
                   assetSVG(contentType),
                   height: size.height * 0.022,
+                  package: 'awesome_snackbar_content',
                 ),
               )
             ],
