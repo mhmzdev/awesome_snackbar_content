@@ -100,6 +100,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
             ],
           ),
         ),
+
+        /// other SVGs in body
         Positioned(
           bottom: 0,
           child: ClipRRect(
