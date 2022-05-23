@@ -6,3 +6,7 @@
 
 * Minor changes
 * Assets path added
+
+### 0.0.3
+
+* Documentation updated
