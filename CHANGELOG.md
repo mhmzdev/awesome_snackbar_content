@@ -18,3 +18,7 @@
 ### 0.0.5
 
 * Documentation issues
+
+### 0.0.6
+
+* Desktop support added
