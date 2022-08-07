@@ -22,3 +22,7 @@
 ### 0.0.6
 
 * Desktop support added
+
+### 0.0.7
+
+* Handle issues with responsiveness on various screens

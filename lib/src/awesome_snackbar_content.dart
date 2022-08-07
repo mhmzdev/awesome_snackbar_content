@@ -18,20 +18,12 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// `optional` color of the SnackBar body
   final Color? color;
 
-  /// `optional` isDesktop of the SnackBar body
-  final bool isDesktop = false;
-  
-   /// `optional` isDesktop of the SnackBar body
-  final bool xlarge = false;
-  
   /// contentType will reflect the overall theme of SnackBar: failure, success, help, warning
   final ContentType contentType;
 
   const AwesomeSnackbarContent({
     Key? key,
     this.color,
-    this.isDesktop,
-    this.xlarge,
     required this.title,
     required this.message,
     required this.contentType,
@@ -51,16 +43,13 @@ class AwesomeSnackbarContent extends StatelessWidget {
       children: [
         /// SnackBar Body
         Container(
-          padding: isDesktop ? EdgeInsets.only(
-            left: size.width * 0.025,
-            right: size.width * 0.025,
-            top: size.height * 0.025,
-            bottom: size.height * 0.025,) :
-            EdgeInsets.symmetric(
-            horizontal: size.width * 0.05,
-            vertical: size.height * 0.025,
+          padding: EdgeInsets.symmetric(
+            horizontal:
+                size.height >= 600 ? size.width * 0.025 : size.width * 0.05,
+            vertical:
+                size.width >= 600 ? size.height * 0.02 : size.height * 0.025,
           ),
-          height: xlarge ? size.height * 0.140 : size.height * 0.125,
+          height: size.height * 0.12,
           decoration: BoxDecoration(
             color: color ?? contentType.color,
             borderRadius: BorderRadius.circular(20),
@@ -68,7 +57,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                width: isDesktop ? size.width * 0.045 : size.width * 0.122,
+                width:
+                    size.width >= 600 ? size.width * 0.01 : size.width * 0.122,
               ),
               Expanded(
                 child: Column(
@@ -81,7 +71,9 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         Text(
                           title,
                           style: TextStyle(
-                            fontSize: isDesktop ?  size.height * 0.040 :  size.height * 0.025,
+                            fontSize: size.width >= 600
+                                ? size.height * 0.03
+                                : size.height * 0.025,
                             color: Colors.white,
                           ),
                         ),
@@ -90,7 +82,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                               .hideCurrentSnackBar(),
                           child: SvgPicture.asset(
                             AssetsPath.failure,
-                            height:  size.height  * 0.022,
+                            height: size.height * 0.022,
                             package: 'awesome_snackbar_content',
                           ),
                         )
@@ -131,8 +123,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: -size.height * 0.025,
-          left: size.width * 0.035,
+          top: -size.height * 0.02,
+          left: size.width >= 600 ? 10 : size.width * 0.035,
           child: Stack(
             alignment: Alignment.center,
             children: [
