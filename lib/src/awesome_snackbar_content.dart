@@ -34,117 +34,141 @@ class AwesomeSnackbarContent extends StatelessWidget {
     /// For managing responsiveness
     Size size = MediaQuery.of(context).size;
 
+    // is mobile
+    bool isMobile = size.width <= 768;
+    bool isTablet = size.width > 768 && size.width <= 992;
+    bool isDesktop = size.width >= 992;
+
     /// For reflecting different color shades in the SnackBar
     final hsl = HSLColor.fromColor(color ?? contentType.color!);
     final hslDark = hsl.withLightness((hsl.lightness - 0.1).clamp(0.0, 1.0));
 
-    return Stack(
-      clipBehavior: Clip.none,
+    return Row(
       children: [
-        /// SnackBar Body
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal:
-                size.height >= 600 ? size.width * 0.025 : size.width * 0.05,
-            vertical:
-                size.width >= 600 ? size.height * 0.02 : size.height * 0.025,
-          ),
-          height: size.height * 0.12,
-          decoration: BoxDecoration(
-            color: color ?? contentType.color,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              SizedBox(
-                width:
-                    size.width >= 600 ? size.width * 0.01 : size.width * 0.122,
+        isDesktop || isTablet
+            ? const Spacer()
+            : SizedBox(
+                width: size.width * 0.02,
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          flex: isTablet || isMobile ? 7 : 1,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              /// SnackBar Body
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: isTablet ? size.width * 0.1 : 0,
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: isTablet ? size.width * 0.1 : size.width * 0.05,
+                  vertical: isTablet || isDesktop
+                      ? size.height * 0.02
+                      : size.height * 0.025,
+                ),
+                height: size.height * 0.12,
+                decoration: BoxDecoration(
+                  color: color ?? contentType.color,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        /// `title` parameter
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: size.width >= 600
-                                ? size.height * 0.03
-                                : size.height * 0.025,
-                            color: Colors.white,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => ScaffoldMessenger.of(context)
-                              .hideCurrentSnackBar(),
-                          child: SvgPicture.asset(
-                            AssetsPath.failure,
-                            height: size.height * 0.022,
-                            package: 'awesome_snackbar_content',
-                          ),
-                        )
-                      ],
-                    ),
                     const Spacer(),
+                    Expanded(
+                      flex: isMobile ? 8 : 25,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              /// `title` parameter
+                              Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize: isTablet || isDesktop
+                                      ? size.height * 0.03
+                                      : size.height * 0.025,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar(),
+                                child: SvgPicture.asset(
+                                  AssetsPath.failure,
+                                  height: size.height * 0.022,
+                                  package: 'awesome_snackbar_content',
+                                ),
+                              )
+                            ],
+                          ),
+                          const Spacer(),
 
-                    /// `message` body text parameter
-                    Text(
-                      message,
-                      style: TextStyle(
-                        fontSize: size.height * 0.016,
-                        color: Colors.white,
+                          /// `message` body text parameter
+                          Text(
+                            message,
+                            style: TextStyle(
+                              fontSize: size.height * 0.016,
+                              color: Colors.white,
+                            ),
+                            maxLines: 2,
+                          ),
+                        ],
                       ),
-                      maxLines: 2,
                     ),
+                  ],
+                ),
+              ),
+
+              /// other SVGs in body
+              Positioned(
+                bottom: 0,
+                left: isTablet ? size.width * 0.1 : 0,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  child: SvgPicture.asset(
+                    AssetsPath.bubbles,
+                    height: size.height * 0.06,
+                    width: size.width * 0.05,
+                    color: hslDark.toColor(),
+                    package: 'awesome_snackbar_content',
+                  ),
+                ),
+              ),
+              Positioned(
+                top: -size.height * 0.02,
+                left: isTablet ? size.width * 0.125 : size.width * 0.02,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      AssetsPath.back,
+                      height: size.height * 0.06,
+                      color: hslDark.toColor(),
+                      package: 'awesome_snackbar_content',
+                    ),
+                    Positioned(
+                      top: size.height * 0.015,
+                      child: SvgPicture.asset(
+                        assetSVG(contentType),
+                        height: size.height * 0.022,
+                        package: 'awesome_snackbar_content',
+                      ),
+                    )
                   ],
                 ),
               ),
             ],
           ),
         ),
-
-        /// other SVGs in body
-        Positioned(
-          bottom: 0,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-            ),
-            child: SvgPicture.asset(
-              AssetsPath.bubbles,
-              height: size.height * 0.06,
-              width: size.width * 0.05,
-              color: hslDark.toColor(),
-              package: 'awesome_snackbar_content',
-            ),
-          ),
-        ),
-        Positioned(
-          top: -size.height * 0.02,
-          left: size.width >= 600 ? 10 : size.width * 0.035,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              SvgPicture.asset(
-                AssetsPath.back,
-                height: size.height * 0.06,
-                color: hslDark.toColor(),
-                package: 'awesome_snackbar_content',
+        isDesktop || isTablet
+            ? const Spacer()
+            : SizedBox(
+                width: size.width * 0.02,
               ),
-              Positioned(
-                top: size.height * 0.015,
-                child: SvgPicture.asset(
-                  assetSVG(contentType),
-                  height: size.height * 0.022,
-                  package: 'awesome_snackbar_content',
-                ),
-              )
-            ],
-          ),
-        ),
       ],
     );
   }
