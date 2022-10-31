@@ -97,7 +97,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              /// More info to show full message when omitted in the message body
+                              /// Tooltip widgte to show more info to show full message when omitted in the message body
                               Expanded(
                                 flex: 1,
                                 child: Tooltip(
