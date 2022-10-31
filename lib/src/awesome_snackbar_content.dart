@@ -21,6 +21,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// contentType will reflect the overall theme of SnackBar: failure, success, help, warning
   final ContentType contentType;
 
+  ///
+
   const AwesomeSnackbarContent({
     Key? key,
     this.color,
@@ -83,36 +85,70 @@ class AwesomeSnackbarContent extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               /// `title` parameter
-                              Text(
-                                title,
-                                style: TextStyle(
-                                  fontSize: isTablet || isDesktop
-                                      ? size.height * 0.03
-                                      : size.height * 0.025,
-                                  color: Colors.white,
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  title,
+                                  style: TextStyle(
+                                    fontSize: isTablet || isDesktop
+                                        ? size.height * 0.03
+                                        : size.height * 0.025,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () => ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar(),
-                                child: SvgPicture.asset(
-                                  AssetsPath.failure,
-                                  height: size.height * 0.022,
-                                  package: 'awesome_snackbar_content',
+                              /// More info to show full message when omitted in the message body
+                              Expanded(
+                                flex: 1,
+                                child: Tooltip(
+                                  message: message,
+                                  triggerMode: TooltipTriggerMode.tap,
+                                  showDuration: const Duration(seconds: 3),
+                                  padding: const EdgeInsets.all(30),
+                                  margin: const EdgeInsets.only(
+                                      top: 30, left: 30, right: 30),
+                                  decoration: BoxDecoration(
+                                      color: color?.withOpacity(0.6) ?? contentType.color!.withOpacity(0.6),
+                                      borderRadius: BorderRadius.circular(22)),
+                                  textStyle: const TextStyle(
+                                    fontSize: 15,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.white,
+                                  ),
+                                  child: InkWell(
+                                    child: SvgPicture.asset(
+                                      AssetsPath.help,
+                                      height: size.height * 0.022,
+                                      package: 'awesome_snackbar_content',
+                                    ),
+                                  ),
                                 ),
-                              )
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () => ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar(),
+                                  child: SvgPicture.asset(
+                                    AssetsPath.failure,
+                                    height: size.height * 0.022,
+                                    package: 'awesome_snackbar_content',
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                          const Spacer(),
-
                           /// `message` body text parameter
-                          Text(
-                            message,
-                            style: TextStyle(
-                              fontSize: size.height * 0.016,
-                              color: Colors.white,
+                          Expanded(
+                            child: Text(
+                              message,
+                              style: TextStyle(
+                                fontSize: size.height * 0.016,
+                                color: Colors.white,
+                              ),
+                              maxLines: 2,
+                              //overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 2,
                           ),
                         ],
                       ),
