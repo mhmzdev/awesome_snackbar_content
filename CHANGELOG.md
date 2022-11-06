@@ -30,3 +30,10 @@
 ## 0.0.8
 
 * Changelog.md file format fixes
+
+## 0.0.9
+
+* Overflow issue fixed, idea from [#6](pr6)
+* Configuration added to use in `showMaterialBanner`, see [example](example/example.dart)
+
+[pr6]:(https://github.com/mhmzdev/awesome_snackbar_content/pull/6)
