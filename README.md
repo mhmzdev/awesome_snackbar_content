@@ -10,6 +10,7 @@ A package that lets you uplift your SnackBar or MaterialBanner experience in the
 - `inMaterialBanner`: Simply configure the working according to `showMaterialBanner`
 
 ## Overall Look'n Feel
+https://user-images.githubusercontent.com/43790152/200166529-51927c9d-66a6-4f76-b8f7-990680db2eba.mov
 
 
 ## 📱 Usage
