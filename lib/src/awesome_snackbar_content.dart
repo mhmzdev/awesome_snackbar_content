@@ -5,9 +5,15 @@ import 'package:awesome_snackbar_content/src/content_type.dart';
 
 class AwesomeSnackbarContent extends StatelessWidget {
   /// `IMPORTANT NOTE` for SnackBar properties before putting this in `content`
-  /// set backgroundColor: Colors.transparent
-  /// set behavior: SnackBarBehavior.floating
-  /// set elevation: 0.0
+  /// backgroundColor: Colors.transparent
+  /// behavior: SnackBarBehavior.floating
+  /// elevation: 0.0
+
+  /// /// `IMPORTANT NOTE` for MaterialBanner properties before putting this in `content`
+  /// backgroundColor: Colors.transparent
+  /// forceActionsBelow: true,
+  /// elevation: 0.0
+  /// [inMaterialBanner = true]
 
   /// title is the header String that will show on top
   final String title;
@@ -15,13 +21,14 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// message String is the body message which shows only 2 lines at max
   final String message;
 
-  /// `optional` color of the SnackBar body
+  /// `optional` color of the SnackBar/MaterialBanner body
   final Color? color;
 
-  /// contentType will reflect the overall theme of SnackBar: failure, success, help, warning
+  /// contentType will reflect the overall theme of SnackBar/MaterialBanner: failure, success, help, warning
   final ContentType contentType;
 
-  ///
+  /// if you want to use this in materialBanner
+  final bool inMaterialBanner;
 
   const AwesomeSnackbarContent({
     Key? key,
@@ -29,14 +36,14 @@ class AwesomeSnackbarContent extends StatelessWidget {
     required this.title,
     required this.message,
     required this.contentType,
+    this.inMaterialBanner = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    /// For managing responsiveness
     Size size = MediaQuery.of(context).size;
 
-    // is mobile
+    // screen dimensions
     bool isMobile = size.width <= 768;
     bool isTablet = size.width > 768 && size.width <= 992;
     bool isDesktop = size.width >= 992;
@@ -47,13 +54,13 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
     return Row(
       children: [
-        isDesktop || isTablet
+        !isMobile
             ? const Spacer()
             : SizedBox(
-                width: size.width * 0.02,
+                width: size.width * 0.01,
               ),
         Expanded(
-          flex: isTablet || isMobile ? 7 : 1,
+          flex: !isDesktop ? 8 : 1,
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -64,11 +71,9 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 ),
                 padding: EdgeInsets.symmetric(
                   horizontal: isTablet ? size.width * 0.1 : size.width * 0.05,
-                  vertical: isTablet || isDesktop
-                      ? size.height * 0.02
-                      : size.height * 0.025,
+                  vertical:
+                      !isMobile ? size.height * 0.03 : size.height * 0.025,
                 ),
-                height: size.height * 0.12,
                 decoration: BoxDecoration(
                   color: color ?? contentType.color,
                   borderRadius: BorderRadius.circular(20),
@@ -79,6 +84,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                     Expanded(
                       flex: isMobile ? 8 : 25,
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
@@ -97,58 +103,34 @@ class AwesomeSnackbarContent extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              /// Tooltip widgte to show more info to show full message when omitted in the message body
-                              Expanded(
-                                flex: 1,
-                                child: Tooltip(
-                                  message: message,
-                                  triggerMode: TooltipTriggerMode.tap,
-                                  showDuration: const Duration(seconds: 3),
-                                  padding: const EdgeInsets.all(30),
-                                  margin: const EdgeInsets.only(
-                                      top: 30, left: 30, right: 30),
-                                  decoration: BoxDecoration(
-                                      color: color?.withOpacity(0.6) ?? contentType.color!.withOpacity(0.6),
-                                      borderRadius: BorderRadius.circular(22)),
-                                  textStyle: const TextStyle(
-                                    fontSize: 15,
-                                    fontStyle: FontStyle.italic,
-                                    color: Colors.white,
-                                  ),
-                                  child: InkWell(
-                                    child: SvgPicture.asset(
-                                      AssetsPath.help,
-                                      height: size.height * 0.022,
-                                      package: 'awesome_snackbar_content',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: InkWell(
-                                  onTap: () => ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar(),
-                                  child: SvgPicture.asset(
-                                    AssetsPath.failure,
-                                    height: size.height * 0.022,
-                                    package: 'awesome_snackbar_content',
-                                  ),
+
+                              InkWell(
+                                onTap: () {
+                                  if (inMaterialBanner) {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentMaterialBanner();
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
+                                  }
+                                },
+                                child: SvgPicture.asset(
+                                  AssetsPath.failure,
+                                  height: size.height * 0.022,
+                                  package: 'awesome_snackbar_content',
                                 ),
                               ),
                             ],
                           ),
+
                           /// `message` body text parameter
-                          Expanded(
-                            child: Text(
-                              message,
-                              style: TextStyle(
-                                fontSize: size.height * 0.016,
-                                color: Colors.white,
-                              ),
-                              maxLines: 2,
-                              //overflow: TextOverflow.ellipsis,
+                          Text(
+                            message,
+                            style: TextStyle(
+                              fontSize: size.height * 0.016,
+                              color: Colors.white,
                             ),
+                            textAlign: TextAlign.justify,
                           ),
                         ],
                       ),
@@ -174,6 +156,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                   ),
                 ),
               ),
+
               Positioned(
                 top: -size.height * 0.02,
                 left: isTablet ? size.width * 0.125 : size.width * 0.02,
@@ -200,10 +183,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
             ],
           ),
         ),
-        isDesktop || isTablet
+        !isMobile
             ? const Spacer()
             : SizedBox(
-                width: size.width * 0.02,
+                width: size.width * 0.01,
               ),
       ],
     );
