@@ -1,3 +1,9 @@
+## 0.1.2
+* [Issue #10][issue-10] fixed
+* upgraded flutter_svg dependency
+
+[issue-10]: https://github.com/mhmzdev/awesome_snackbar_content/issues/10
+
 ## 0.1.1
 
 * [Issue #9][issue-9] fixed
