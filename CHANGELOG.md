@@ -1,3 +1,7 @@
+## 0.1.2
+
+* [Issue #13][issue-12] fixed - Support for RTL languages added
+
 ## 0.1.1
 
 * [Issue #9][issue-9] fixed

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:awesome_snackbar_content/src/assets_path.dart';
 import 'package:awesome_snackbar_content/src/content_type.dart';
+import 'package:awesome_snackbar_content/utils/languages.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AwesomeSnackbarContent extends StatelessWidget {
   /// `IMPORTANT NOTE` for SnackBar properties before putting this in `content`
@@ -41,7 +42,20 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    bool isRTL = false;
+
+    final size = MediaQuery.of(context).size;
+
+    final loc = Localizations.maybeLocaleOf(context);
+    final localeLanguageCode = loc?.languageCode;
+
+    if (localeLanguageCode != null) {
+      for (var code in Languages.codes) {
+        if (localeLanguageCode.toLowerCase() == code.toLowerCase()) {
+          isRTL = true;
+        }
+      }
+    }
 
     // screen dimensions
     bool isMobile = size.width <= 768;
@@ -54,6 +68,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
     double horizontalPadding = 0.0;
     double leftSpace = size.width * 0.12;
+    double rightSpace = size.width * 0.12;
 
     if (isMobile) {
       horizontalPadding = size.width * 0.01;
@@ -103,8 +118,14 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
           Positioned(
             top: -size.height * 0.02,
-            left: leftSpace -
-                (isMobile ? size.width * 0.075 : size.width * 0.035),
+            left: !isRTL
+                ? leftSpace -
+                    (isMobile ? size.width * 0.075 : size.width * 0.035)
+                : null,
+            right: isRTL
+                ? rightSpace -
+                    (isMobile ? size.width * 0.075 : size.width * 0.035)
+                : null,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -128,14 +149,14 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
           /// content
           Positioned.fill(
-            left: leftSpace,
-            right: size.width * 0.03,
+            left: isRTL ? size.width * 0.03 : leftSpace,
+            right: isRTL ? rightSpace : size.width * 0.03,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: size.height * 0.015,
+                  height: size.height * 0.02,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,9 +181,9 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         if (inMaterialBanner) {
                           ScaffoldMessenger.of(context)
                               .hideCurrentMaterialBanner();
-                        } else {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          return;
                         }
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       },
                       child: SvgPicture.asset(
                         AssetsPath.failure,
