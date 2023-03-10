@@ -30,6 +30,9 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
   /// if you want to use this in materialBanner
   final bool inMaterialBanner;
+  
+  /// `optional` message font size of the SnackBar/MaterialBanner
+  final double? messageFontSize;
 
   const AwesomeSnackbarContent({
     Key? key,
@@ -37,6 +40,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
     required this.title,
     required this.message,
     required this.contentType,
+    this.messageFontSize = 0,
     this.inMaterialBanner = false,
   }) : super(key: key);
 
@@ -202,7 +206,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                   child: Text(
                     message,
                     style: TextStyle(
-                      fontSize: size.height * 0.016,
+                      fontSize: messageFontSize ==
+                          0 ? size.height * 0.016 : messageFontSize,
                       color: Colors.white,
                     ),
                   ),
