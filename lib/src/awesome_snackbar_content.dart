@@ -32,9 +32,17 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// if you want to use this in materialBanner
   final bool inMaterialBanner;
 
+  /// if you want to customize the font size of the title
+  final double? titleFontSize;
+
+  /// if you want to customize the font size of the message
+  final double? messageFontSize;
+
   const AwesomeSnackbarContent({
     Key? key,
     this.color,
+    this.titleFontSize,
+    this.messageFontSize,
     required this.title,
     required this.message,
     required this.contentType,
@@ -76,7 +84,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
     } else if (isTablet) {
       leftSpace = size.width * 0.05;
       horizontalPadding = size.width * 0.2;
-    } else if (isDesktop) { // else {
+    } else if (isDesktop) {
+      // else {
       leftSpace = size.width * 0.05;
       horizontalPadding = size.width * 0.3;
     }
@@ -170,9 +179,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
                       child: Text(
                         title,
                         style: TextStyle(
-                          fontSize: !isMobile
-                              ? size.height * 0.03
-                              : size.height * 0.025,
+                          fontSize: titleFontSize ??
+                              (!isMobile
+                                  ? size.height * 0.03
+                                  : size.height * 0.025),
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -205,7 +215,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                   child: Text(
                     message,
                     style: TextStyle(
-                      fontSize: size.height * 0.016,
+                      fontSize: messageFontSize ?? size.height * 0.016,
                       color: Colors.white,
                     ),
                   ),
