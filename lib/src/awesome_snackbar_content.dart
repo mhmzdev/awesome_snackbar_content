@@ -1,6 +1,5 @@
 import 'package:awesome_snackbar_content/src/assets_path.dart';
 import 'package:awesome_snackbar_content/src/content_type.dart';
-import 'package:awesome_snackbar_content/utils/languages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -42,20 +41,9 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isRTL = false;
+    bool isRTL = Directionality.of(context) == TextDirection.rtl;
 
     final size = MediaQuery.of(context).size;
-
-    final loc = Localizations.maybeLocaleOf(context);
-    final localeLanguageCode = loc?.languageCode;
-
-    if (localeLanguageCode != null) {
-      for (var code in Languages.codes) {
-        if (localeLanguageCode.toLowerCase() == code.toLowerCase()) {
-          isRTL = true;
-        }
-      }
-    }
 
     // screen dimensions
     bool isMobile = size.width <= 768;
@@ -98,7 +86,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
             ),
           ),
 
-          /// SVGs in body
+          /// Splash SVG asset
           Positioned(
             bottom: 0,
             left: 0,
@@ -116,14 +104,17 @@ class AwesomeSnackbarContent extends StatelessWidget {
             ),
           ),
 
+          // Bubble Icon
           Positioned(
             top: -size.height * 0.02,
             left: !isRTL
                 ? leftSpace -
+                    8 -
                     (isMobile ? size.width * 0.075 : size.width * 0.035)
                 : null,
             right: isRTL
                 ? rightSpace -
+                    8 -
                     (isMobile ? size.width * 0.075 : size.width * 0.035)
                 : null,
             child: Stack(
