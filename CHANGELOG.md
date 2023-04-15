@@ -1,6 +1,15 @@
+## 0.1.3
+
+* 
+* Support for RTL languages improved - [Issue # 15][i15]
+* `titleFontSize` and `messageFontSize` properties added along with `flutter_svg` version fixed - [PR # 18][p18]
+
+[p18]: https://github.com/mhmzdev/awesome_snackbar_content/pull/18
+[i15]: https://github.com/mhmzdev/awesome_snackbar_content/issues/15
+
 ## 0.1.2
 
-* [Issue #13][issue-12] fixed - Support for RTL languages added
+* Support for RTL languages added
 
 ## 0.1.1
 
