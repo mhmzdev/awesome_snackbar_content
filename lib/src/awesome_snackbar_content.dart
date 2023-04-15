@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/src/assets_path.dart';
 import 'package:awesome_snackbar_content/src/content_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:ui' as ui;
 
 class AwesomeSnackbarContent extends StatelessWidget {
   /// `IMPORTANT NOTE` for SnackBar properties before putting this in `content`
@@ -30,9 +31,17 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// if you want to use this in materialBanner
   final bool inMaterialBanner;
 
+  /// if you want to customize the font size of the title
+  final double? titleFontSize;
+
+  /// if you want to customize the font size of the message
+  final double? messageFontSize;
+
   const AwesomeSnackbarContent({
     Key? key,
     this.color,
+    this.titleFontSize,
+    this.messageFontSize,
     required this.title,
     required this.message,
     required this.contentType,
@@ -63,7 +72,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
     } else if (isTablet) {
       leftSpace = size.width * 0.05;
       horizontalPadding = size.width * 0.2;
-    } else {
+    } else if (isDesktop) {
+      // else {
       leftSpace = size.width * 0.05;
       horizontalPadding = size.width * 0.3;
     }
@@ -98,7 +108,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 AssetsPath.bubbles,
                 height: size.height * 0.06,
                 width: size.width * 0.05,
-                color: hslDark.toColor(),
+                colorFilter:
+                    _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
                 package: 'awesome_snackbar_content',
               ),
             ),
@@ -123,7 +134,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 SvgPicture.asset(
                   AssetsPath.back,
                   height: size.height * 0.06,
-                  color: hslDark.toColor(),
+                  colorFilter:
+                      _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
                   package: 'awesome_snackbar_content',
                 ),
                 Positioned(
@@ -158,9 +170,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
                       child: Text(
                         title,
                         style: TextStyle(
-                          fontSize: !isMobile
-                              ? size.height * 0.03
-                              : size.height * 0.025,
+                          fontSize: titleFontSize ??
+                              (!isMobile
+                                  ? size.height * 0.03
+                                  : size.height * 0.025),
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -193,7 +206,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                   child: Text(
                     message,
                     style: TextStyle(
-                      fontSize: size.height * 0.016,
+                      fontSize: messageFontSize ?? size.height * 0.016,
                       color: Colors.white,
                     ),
                   ),
@@ -227,4 +240,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
       return AssetsPath.failure;
     }
   }
+
+  static ColorFilter? _getColorFilter(
+          ui.Color? color, ui.BlendMode colorBlendMode) =>
+      color == null ? null : ui.ColorFilter.mode(color, colorBlendMode);
 }
