@@ -222,20 +222,25 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
   /// Reflecting proper icon based on the contentType
   String assetSVG(ContentType contentType) {
-    if (contentType == ContentType.failure) {
-      /// failure will show `CROSS`
-      return AssetsPath.failure;
-    } else if (contentType == ContentType.success) {
-      /// success will show `CHECK`
-      return AssetsPath.success;
-    } else if (contentType == ContentType.warning) {
-      /// warning will show `EXCLAMATION`
-      return AssetsPath.warning;
-    } else if (contentType == ContentType.help) {
-      /// help will show `QUESTION MARK`
-      return AssetsPath.help;
-    } else {
-      return AssetsPath.failure;
+    switch (contentType) {
+      case ContentType.failure:
+
+        /// failure will show `CROSS`
+        return AssetsPath.failure;
+      case ContentType.success:
+
+        /// success will show `CHECK`
+        return AssetsPath.success;
+      case ContentType.warning:
+
+        /// warning will show `EXCLAMATION`
+        return AssetsPath.warning;
+      case ContentType.help:
+
+        /// help will show `QUESTION MARK`
+        return AssetsPath.help;
+      default:
+        return AssetsPath.failure;
     }
   }
 
