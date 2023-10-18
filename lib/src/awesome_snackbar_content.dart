@@ -194,14 +194,23 @@ class AwesomeSnackbarContent extends StatelessWidget {
                     //   ),
                     // ),
 
-                    IconButton(onPressed: (() {
-                      if (inMaterialBanner) {
+                    IconButton(
+                      onPressed: () {
+                        if (inMaterialBanner) {
                           ScaffoldMessenger.of(context)
                               .hideCurrentMaterialBanner();
                           return;
                         }
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    }, icon: const Icon(Icons.close),),
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: size.height * 0.022,
+                      ),
+                    ),
+
+                    
                   ],
                 ),
                 SizedBox(
