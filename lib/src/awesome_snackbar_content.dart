@@ -37,6 +37,12 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// if you want to customize the font size of the message
   final double? messageFontSize;
 
+  /// `optional` semantic label for the close button
+  final String? closeButtonSemanticLabel;
+
+  /// `optional` tooltip for the close button
+  final String? closeButtonTooltip;
+
   const AwesomeSnackbarContent({
     Key? key,
     this.color,
@@ -46,6 +52,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
     required this.message,
     required this.contentType,
     this.inMaterialBanner = false,
+    this.closeButtonSemanticLabel,
+    this.closeButtonTooltip,
   }) : super(key: key);
 
   @override
@@ -178,8 +186,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                       ),
                     ),
 
-                    InkWell(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         if (inMaterialBanner) {
                           ScaffoldMessenger.of(context)
                               .hideCurrentMaterialBanner();
@@ -187,10 +195,12 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         }
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       },
-                      child: SvgPicture.asset(
-                        AssetsPath.failure,
-                        height: size.height * 0.022,
-                        package: 'awesome_snackbar_content',
+                      tooltip: closeButtonTooltip,
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: size.height * 0.022,
+                        semanticLabel: closeButtonSemanticLabel,
                       ),
                     ),
                   ],
