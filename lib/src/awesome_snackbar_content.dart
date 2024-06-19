@@ -63,23 +63,26 @@ class AwesomeSnackbarContent extends StatelessWidget {
     final hslDark = hsl.withLightness((hsl.lightness - 0.1).clamp(0.0, 1.0));
 
     double horizontalPadding = 0.0;
+    double verticalPadding = 0.0;
     double leftSpace = size.width * 0.12;
     double rightSpace = size.width * 0.12;
 
     if (isMobile) {
       horizontalPadding = size.width * 0.01;
+      verticalPadding = size.width * 0.007;
     } else if (isTablet) {
       leftSpace = size.width * 0.05;
       horizontalPadding = size.width * 0.2;
+      verticalPadding = size.width * 0.008;
     } else {
       leftSpace = size.width * 0.05;
       horizontalPadding = size.width * 0.3;
+      verticalPadding = size.width * 0.009;
     }
 
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: horizontalPadding,
-      ),
+          horizontal: horizontalPadding, vertical: verticalPadding),
       height: size.height * 0.125,
       child: Stack(
         clipBehavior: Clip.none,
