@@ -177,23 +177,6 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    // InkWell(
-                    //   onTap: () {
-                    //     if (inMaterialBanner) {
-                    //       ScaffoldMessenger.of(context)
-                    //           .hideCurrentMaterialBanner();
-                    //       return;
-                    //     }
-                    //     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    //   },
-                    //   child: SvgPicture.asset(
-                    //     AssetsPath.failure,
-                    //     height: size.height * 0.022,
-                    //     package: 'awesome_snackbar_content',
-                    //   ),
-                    // ),
-
                     IconButton(
                       onPressed: () {
                         if (inMaterialBanner) {
