@@ -157,7 +157,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: size.height * 0.02,
+                  height: size.height * 0.01,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,9 +177,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    InkWell(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         if (inMaterialBanner) {
                           ScaffoldMessenger.of(context)
                               .hideCurrentMaterialBanner();
@@ -187,10 +186,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         }
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       },
-                      child: SvgPicture.asset(
-                        AssetsPath.failure,
-                        height: size.height * 0.022,
-                        package: 'awesome_snackbar_content',
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: size.height * 0.022,
                       ),
                     ),
                   ],
