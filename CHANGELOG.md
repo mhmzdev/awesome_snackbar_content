@@ -1,6 +1,12 @@
+## 0.1.4
+
+* Fixed icon cutting on top - [Issue # 34][i34]
+* Basic widget tests added
+
+[i34]: https://github.com/mhmzdev/awesome_snackbar_content/issues/34
+
 ## 0.1.3
 
-* 
 * Support for RTL languages improved - [Issue # 15][i15]
 * `titleFontSize` and `messageFontSize` properties added along with `flutter_svg` version fixed - [PR # 18][p18]
 
