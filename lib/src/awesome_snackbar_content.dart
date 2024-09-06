@@ -192,8 +192,6 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         size: size.height * 0.022,
                       ),
                     ),
-
-                    
                   ],
                 ),
                 SizedBox(
