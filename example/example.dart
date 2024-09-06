@@ -14,7 +14,7 @@ class AweseomSnackBarExample extends StatelessWidget {
             ElevatedButton(
               child: const Text('Show Awesome SnackBar'),
               onPressed: () {
-                final snackBar = SnackBar(
+                const snackBar = SnackBar(
                   /// need to set following properties for best effect of awesome_snackbar_content
                   elevation: 0,
                   behavior: SnackBarBehavior.floating,
@@ -38,7 +38,7 @@ class AweseomSnackBarExample extends StatelessWidget {
             ElevatedButton(
               child: const Text('Show Awesome Material Banner'),
               onPressed: () {
-                final materialBanner = MaterialBanner(
+                const materialBanner = MaterialBanner(
                   /// need to set following properties for best effect of awesome_snackbar_content
                   elevation: 0,
                   backgroundColor: Colors.transparent,
@@ -53,7 +53,7 @@ class AweseomSnackBarExample extends StatelessWidget {
                     // to configure for material banner
                     inMaterialBanner: true,
                   ),
-                  actions: const [SizedBox.shrink()],
+                  actions: [SizedBox.shrink()],
                 );
 
                 ScaffoldMessenger.of(context)
