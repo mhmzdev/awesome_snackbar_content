@@ -115,7 +115,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
           // Bubble Icon
           Positioned(
-            top: -size.height * 0.02,
+            top: -size.height * 0.015,
             left: !isRTL
                 ? leftSpace -
                     8 -
