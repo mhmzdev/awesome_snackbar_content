@@ -1,6 +1,6 @@
 name: awesome_snackbar_content
 description: Uplift your snackbar experience with various alert messages i.e. success, failure, help or warning with unique UI design.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/mhmzdev/awesome_snackbar_content
 
 environment:

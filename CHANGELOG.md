@@ -2,6 +2,8 @@
 
 * Fixed icon cutting on top - [Issue # 34][i34]
 * Basic widget tests added
+* `titleFontStyle` added to customize the title
+* `messageFontStyle` added to customize the message
 
 [i34]: https://github.com/mhmzdev/awesome_snackbar_content/issues/34
 
