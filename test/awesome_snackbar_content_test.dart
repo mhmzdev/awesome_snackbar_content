@@ -164,4 +164,68 @@ void main() {
     // Verify the MaterialBanner is closed
     expect(find.byType(AwesomeSnackbarContent), findsNothing);
   });
+
+  testWidgets('applies custom messageTextStyle', (WidgetTester tester) async {
+    const title = 'Test Title';
+    const message = 'This is a test message.';
+    const customMessageTextStyle = TextStyle(
+      fontSize: 18.0,
+      color: Colors.blue,
+      fontWeight: FontWeight.bold,
+    );
+
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(
+        body: AwesomeSnackbarContent(
+          title: title,
+          message: message,
+          contentType: ContentType.failure,
+          messageTextStyle: customMessageTextStyle,
+        ),
+      ),
+    ));
+
+    // Find the Text widget for the message
+    final messageFinder = find.text(message);
+
+    // Get the Text widget
+    final messageWidget = tester.widget(messageFinder) as Text;
+
+    // Verify the text style
+    expect(messageWidget.style?.fontSize, customMessageTextStyle.fontSize);
+    expect(messageWidget.style?.color, customMessageTextStyle.color);
+    expect(messageWidget.style?.fontWeight, customMessageTextStyle.fontWeight);
+  });
+
+  testWidgets('applies custom titleTextStyle', (WidgetTester tester) async {
+    const title = 'Test Title';
+    const message = 'This is a test message.';
+    const customTitleTextStyle = TextStyle(
+      fontSize: 18.0,
+      color: Colors.blue,
+      fontWeight: FontWeight.bold,
+    );
+
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(
+        body: AwesomeSnackbarContent(
+          title: title,
+          message: message,
+          contentType: ContentType.failure,
+          titleTextStyle: customTitleTextStyle,
+        ),
+      ),
+    ));
+
+    // Find the Text widget for the message
+    final titleFinder = find.text(title);
+
+    // Get the Text widget
+    final messageWidget = tester.widget(titleFinder) as Text;
+
+    // Verify the text style
+    expect(messageWidget.style?.fontSize, customTitleTextStyle.fontSize);
+    expect(messageWidget.style?.color, customTitleTextStyle.color);
+    expect(messageWidget.style?.fontWeight, customTitleTextStyle.fontWeight);
+  });
 }
