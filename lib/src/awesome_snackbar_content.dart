@@ -31,17 +31,17 @@ class AwesomeSnackbarContent extends StatelessWidget {
   /// if you want to use this in materialBanner
   final bool inMaterialBanner;
 
-  /// if you want to customize the font size of the title
-  final double? titleFontSize;
+  /// if you want to customize the font style of the title
+  final TextStyle? titleTextStyle;
 
-  /// if you want to customize the font size of the message
-  final double? messageFontSize;
+  /// if you want to customize the font style of the message
+  final TextStyle? messageTextStyle;
 
   const AwesomeSnackbarContent({
     Key? key,
     this.color,
-    this.titleFontSize,
-    this.messageFontSize,
+    this.titleTextStyle,
+    this.messageTextStyle,
     required this.title,
     required this.message,
     required this.contentType,
@@ -167,14 +167,14 @@ class AwesomeSnackbarContent extends StatelessWidget {
                       flex: 3,
                       child: Text(
                         title,
-                        style: TextStyle(
-                          fontSize: titleFontSize ??
-                              (!isMobile
+                        style: titleTextStyle ??
+                            TextStyle(
+                              fontSize: (!isMobile
                                   ? size.height * 0.03
                                   : size.height * 0.025),
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
                       ),
                     ),
                     IconButton(
@@ -202,10 +202,11 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 Expanded(
                   child: Text(
                     message,
-                    style: TextStyle(
-                      fontSize: messageFontSize ?? size.height * 0.016,
-                      color: Colors.white,
-                    ),
+                    style: messageTextStyle ??
+                        TextStyle(
+                          fontSize: size.height * 0.016,
+                          color: Colors.white,
+                        ),
                   ),
                 ),
                 SizedBox(

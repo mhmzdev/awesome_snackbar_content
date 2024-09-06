@@ -13,6 +13,7 @@ Link to issue which this PR is resolving
 - [ ] Tested on multiplatform (web, tablet, mobile views)
 - [ ] No commented code
 - [ ] No `print` statement left
+- [ ] Widget tests added
 
 ## Gif (if applicable)
 
