@@ -3,6 +3,7 @@ import 'package:awesome_snackbar_content/src/content_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:ui' as ui;
+import 'dart:math' as math;
 
 class AwesomeSnackbarContent extends StatelessWidget {
   /// `IMPORTANT NOTE` for SnackBar properties before putting this in `content`
@@ -50,21 +51,21 @@ class AwesomeSnackbarContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isRTL = Directionality.of(context) == TextDirection.rtl;
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
 
     final size = MediaQuery.of(context).size;
 
     // screen dimensions
-    bool isMobile = size.width <= 768;
-    bool isTablet = size.width > 768 && size.width <= 992;
+    final isMobile = size.width <= 768;
+    final isTablet = size.width > 768 && size.width <= 992;
 
     /// for reflecting different color shades in the SnackBar
     final hsl = HSLColor.fromColor(color ?? contentType.color!);
     final hslDark = hsl.withLightness((hsl.lightness - 0.1).clamp(0.0, 1.0));
 
-    double horizontalPadding = 0.0;
-    double leftSpace = size.width * 0.12;
-    double rightSpace = size.width * 0.12;
+    var horizontalPadding = 0.0;
+    var leftSpace = size.width * 0.12;
+    final rightSpace = size.width * 0.12;
 
     if (isMobile) {
       horizontalPadding = size.width * 0.01;
@@ -80,7 +81,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
       ),
-      height: size.height * 0.125,
+      height: isMobile ? 100 : 130,
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
@@ -97,18 +98,23 @@ class AwesomeSnackbarContent extends StatelessWidget {
           /// Splash SVG asset
           Positioned(
             bottom: 0,
-            left: 0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-              ),
-              child: SvgPicture.asset(
-                AssetsPath.bubbles,
-                height: size.height * 0.06,
-                width: size.width * 0.05,
-                colorFilter:
-                    _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
-                package: 'awesome_snackbar_content',
+            left: !isRTL ? 0 : null,
+            right: isRTL ? 0 : null,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(isRTL ? math.pi : math.pi * 2),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                ),
+                child: SvgPicture.asset(
+                  AssetsPath.bubbles,
+                  height: 50,
+                  width: 50,
+                  colorFilter:
+                      _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
+                  package: 'awesome_snackbar_content',
+                ),
               ),
             ),
           ),
@@ -131,7 +137,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   AssetsPath.back,
-                  height: size.height * 0.06,
+                  height: 45,
                   colorFilter:
                       _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
                   package: 'awesome_snackbar_content',
@@ -140,10 +146,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
                   top: size.height * 0.015,
                   child: SvgPicture.asset(
                     assetSVG(contentType),
-                    height: size.height * 0.022,
+                    height: 18,
                     package: 'awesome_snackbar_content',
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -156,9 +162,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -169,9 +173,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
                         title,
                         style: titleTextStyle ??
                             TextStyle(
-                              fontSize: (!isMobile
-                                  ? size.height * 0.03
-                                  : size.height * 0.025),
+                              fontSize: !isMobile ? 22 : 18,
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
@@ -194,9 +196,6 @@ class AwesomeSnackbarContent extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: size.height * 0.005,
-                ),
 
                 /// `message` body text parameter
                 Expanded(
@@ -204,17 +203,18 @@ class AwesomeSnackbarContent extends StatelessWidget {
                     message,
                     style: messageTextStyle ??
                         TextStyle(
-                          fontSize: size.height * 0.016,
+                          fontSize: isMobile ? 14 : 16,
                           color: Colors.white,
                         ),
+                    maxLines: isMobile ? 2 : 3,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.015,
-                ),
+                const SizedBox(height: 5),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -245,6 +245,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
   }
 
   static ColorFilter? _getColorFilter(
-          ui.Color? color, ui.BlendMode colorBlendMode) =>
+    ui.Color? color,
+    ui.BlendMode colorBlendMode,
+  ) =>
       color == null ? null : ui.ColorFilter.mode(color, colorBlendMode);
 }
