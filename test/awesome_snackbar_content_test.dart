@@ -9,15 +9,17 @@ void main() {
     const title = 'Test Title';
     const message = 'This is a test message.';
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AwesomeSnackbarContent(
-          title: title,
-          message: message,
-          contentType: ContentType.failure,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AwesomeSnackbarContent(
+            title: title,
+            message: message,
+            contentType: ContentType.failure,
+          ),
         ),
       ),
-    ));
+    );
 
     // Verify title and message are displayed
     expect(find.text(title), findsOneWidget);
@@ -32,36 +34,38 @@ void main() {
     const title = 'Test Title';
     const message = 'This is a test message.';
 
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: Builder(
-          // Use Builder to get a context for ScaffoldMessenger
-          builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showMaterialBanner(
-                  MaterialBanner(
-                    content: const AwesomeSnackbarContent(
-                      title: title,
-                      message: message,
-                      contentType: ContentType.failure,
-                      inMaterialBanner: true,
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Builder(
+            // Use Builder to get a context for ScaffoldMessenger
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showMaterialBanner(
+                    MaterialBanner(
+                      content: const AwesomeSnackbarContent(
+                        title: title,
+                        message: message,
+                        contentType: ContentType.failure,
+                        inMaterialBanner: true,
+                      ),
+                      backgroundColor: Colors.transparent,
+                      forceActionsBelow: true,
+                      elevation: 0.0,
+                      actions: [
+                        Container(),
+                      ], // You might need to provide actual actions here based on your app
                     ),
-                    backgroundColor: Colors.transparent,
-                    forceActionsBelow: true,
-                    elevation: 0.0,
-                    actions: [
-                      Container()
-                    ], // You might need to provide actual actions here based on your app
-                  ),
-                );
-              },
-              child: const Text('Show MaterialBanner'),
-            );
-          },
+                  );
+                },
+                child: const Text('Show MaterialBanner'),
+              );
+            },
+          ),
         ),
       ),
-    ));
+    );
 
     // Tap the button to show the MaterialBanner
     await tester.tap(find.text('Show MaterialBanner'));
@@ -77,32 +81,34 @@ void main() {
 
   testWidgets('closes snackbar when close button is tapped',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: Builder(
-          // Use Builder to get a context for ScaffoldMessenger
-          builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: AwesomeSnackbarContent(
-                      title: 'Test Title',
-                      message: 'Test Message',
-                      contentType: ContentType.failure,
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Builder(
+            // Use Builder to get a context for ScaffoldMessenger
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: AwesomeSnackbarContent(
+                        title: 'Test Title',
+                        message: 'Test Message',
+                        contentType: ContentType.failure,
+                      ),
+                      backgroundColor: Colors.transparent,
+                      behavior: SnackBarBehavior.floating,
+                      elevation: 0.0,
                     ),
-                    backgroundColor: Colors.transparent,
-                    behavior: SnackBarBehavior.floating,
-                    elevation: 0.0,
-                  ),
-                );
-              },
-              child: const Text('Show Snackbar'),
-            );
-          },
+                  );
+                },
+                child: const Text('Show Snackbar'),
+              );
+            },
+          ),
         ),
       ),
-    ));
+    );
 
     // Tap the button to show the snackbar
     await tester.tap(find.text('Show Snackbar'));
@@ -121,34 +127,38 @@ void main() {
 
   testWidgets('closes MaterialBanner when close button is tapped',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: Builder(
-          builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showMaterialBanner(
-                  MaterialBanner(
-                    content: const AwesomeSnackbarContent(
-                      title: 'Test Title',
-                      message: 'Test Message',
-                      contentType: ContentType.failure,
-                      inMaterialBanner:
-                          true, // Indicate it's in a MaterialBanner
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Builder(
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showMaterialBanner(
+                    MaterialBanner(
+                      content: const AwesomeSnackbarContent(
+                        title: 'Test Title',
+                        message: 'Test Message',
+                        contentType: ContentType.failure,
+                        inMaterialBanner:
+                            true, // Indicate it's in a MaterialBanner
+                      ),
+                      backgroundColor: Colors.transparent,
+                      forceActionsBelow: true,
+                      elevation: 0.0,
+                      actions: [
+                        Container(),
+                      ], // Empty actions list for this test
                     ),
-                    backgroundColor: Colors.transparent,
-                    forceActionsBelow: true,
-                    elevation: 0.0,
-                    actions: [Container()], // Empty actions list for this test
-                  ),
-                );
-              },
-              child: const Text('Show MaterialBanner'),
-            );
-          },
+                  );
+                },
+                child: const Text('Show MaterialBanner'),
+              );
+            },
+          ),
         ),
       ),
-    ));
+    );
 
     // Tap the button to show the MaterialBanner
     await tester.tap(find.text('Show MaterialBanner'));
@@ -174,16 +184,18 @@ void main() {
       fontWeight: FontWeight.bold,
     );
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AwesomeSnackbarContent(
-          title: title,
-          message: message,
-          contentType: ContentType.failure,
-          messageTextStyle: customMessageTextStyle,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AwesomeSnackbarContent(
+            title: title,
+            message: message,
+            contentType: ContentType.failure,
+            messageTextStyle: customMessageTextStyle,
+          ),
         ),
       ),
-    ));
+    );
 
     // Find the Text widget for the message
     final messageFinder = find.text(message);
@@ -206,16 +218,18 @@ void main() {
       fontWeight: FontWeight.bold,
     );
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AwesomeSnackbarContent(
-          title: title,
-          message: message,
-          contentType: ContentType.failure,
-          titleTextStyle: customTitleTextStyle,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AwesomeSnackbarContent(
+            title: title,
+            message: message,
+            contentType: ContentType.failure,
+            titleTextStyle: customTitleTextStyle,
+          ),
         ),
       ),
-    ));
+    );
 
     // Find the Text widget for the message
     final titleFinder = find.text(title);
