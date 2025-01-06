@@ -1,3 +1,8 @@
+## 0.1.5
+* Overflow issue fixed - [Issue # 44](https://github.com/mhmzdev/awesome_snackbar_content/issues/42)
+* SDK bump
+* `flutter_linters: 5.0.0` applied
+
 ## 0.1.4
 
 * Fixed icon cutting on top - [Issue # 34][i34]
