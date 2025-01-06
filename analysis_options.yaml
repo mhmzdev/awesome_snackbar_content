@@ -1,4 +1,10 @@
 include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+    - require_trailing_commas
+    - prefer_single_quotes
+    - prefer_const_declarations
+    - unnecessary_this
+    - prefer_final_locals
+    - omit_local_variable_types    
