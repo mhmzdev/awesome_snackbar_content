@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Awesome SnackBar Example',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const AweseomSnackBarExample(),
+    );
+  }
+}
+
 class AweseomSnackBarExample extends StatelessWidget {
-  const AweseomSnackBarExample({Key? key}) : super(key: key);
+  const AweseomSnackBarExample({super.key});
 
   @override
   Widget build(BuildContext context) {
