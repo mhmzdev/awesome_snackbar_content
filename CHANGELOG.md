@@ -1,3 +1,7 @@
+## 0.1.6
+* Example directory updated - [Example](example/lib/main.dart)
+* Misc formatting
+
 ## 0.1.5
 * Overflow issue fixed - [Issue # 44](https://github.com/mhmzdev/awesome_snackbar_content/issues/42)
 * SDK bump
