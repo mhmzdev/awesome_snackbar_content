@@ -1,10 +1,10 @@
 name: awesome_snackbar_content
 description: Uplift your snackbar experience with various alert messages i.e. success, failure, help or warning with unique UI design.
-version: 0.1.6
+version: 0.1.7
 homepage: https://github.com/mhmzdev/awesome_snackbar_content
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: 3.8.1
   flutter: ">=1.17.0"
 
 dependencies:
@@ -19,7 +19,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # The following section is specific to Flutter packages.
 flutter:

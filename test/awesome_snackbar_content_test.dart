@@ -4,8 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 void main() {
-  testWidgets('renders basic structure and content SnackBar',
-      (WidgetTester tester) async {
+  testWidgets('renders basic structure and content SnackBar', (
+    WidgetTester tester,
+  ) async {
     const title = 'Test Title';
     const message = 'This is a test message.';
 
@@ -29,8 +30,9 @@ void main() {
     expect(find.byIcon(Icons.close), findsOneWidget);
   });
 
-  testWidgets('renders basic structure and content in MaterialBanner',
-      (WidgetTester tester) async {
+  testWidgets('renders basic structure and content in MaterialBanner', (
+    WidgetTester tester,
+  ) async {
     const title = 'Test Title';
     const message = 'This is a test message.';
 
@@ -79,8 +81,9 @@ void main() {
     expect(find.byIcon(Icons.close), findsOneWidget);
   });
 
-  testWidgets('closes snackbar when close button is tapped',
-      (WidgetTester tester) async {
+  testWidgets('closes snackbar when close button is tapped', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -125,8 +128,9 @@ void main() {
     expect(find.byType(AwesomeSnackbarContent), findsNothing);
   });
 
-  testWidgets('closes MaterialBanner when close button is tapped',
-      (WidgetTester tester) async {
+  testWidgets('closes MaterialBanner when close button is tapped', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
