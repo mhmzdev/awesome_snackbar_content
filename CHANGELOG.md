@@ -1,3 +1,7 @@
+## 0.1.7
+* SDK Updated `3.8.1`
+* Linters applied (MISC)
+
 ## 0.1.6
 * Example directory updated - [Example](example/lib/main.dart)
 * Misc formatting

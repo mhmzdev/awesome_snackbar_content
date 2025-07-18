@@ -111,8 +111,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
                   AssetsPath.bubbles,
                   height: 50,
                   width: 50,
-                  colorFilter:
-                      _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
+                  colorFilter: _getColorFilter(
+                    hslDark.toColor(),
+                    ui.BlendMode.srcIn,
+                  ),
                   package: 'awesome_snackbar_content',
                 ),
               ),
@@ -124,13 +126,13 @@ class AwesomeSnackbarContent extends StatelessWidget {
             top: -size.height * 0.015,
             left: !isRTL
                 ? leftSpace -
-                    8 -
-                    (isMobile ? size.width * 0.075 : size.width * 0.035)
+                      8 -
+                      (isMobile ? size.width * 0.075 : size.width * 0.035)
                 : null,
             right: isRTL
                 ? rightSpace -
-                    8 -
-                    (isMobile ? size.width * 0.075 : size.width * 0.035)
+                      8 -
+                      (isMobile ? size.width * 0.075 : size.width * 0.035)
                 : null,
             child: Stack(
               alignment: Alignment.center,
@@ -138,8 +140,10 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 SvgPicture.asset(
                   AssetsPath.back,
                   height: 45,
-                  colorFilter:
-                      _getColorFilter(hslDark.toColor(), ui.BlendMode.srcIn),
+                  colorFilter: _getColorFilter(
+                    hslDark.toColor(),
+                    ui.BlendMode.srcIn,
+                  ),
                   package: 'awesome_snackbar_content',
                 ),
                 Positioned(
@@ -171,7 +175,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                       flex: 3,
                       child: Text(
                         title,
-                        style: titleTextStyle ??
+                        style:
+                            titleTextStyle ??
                             TextStyle(
                               fontSize: !isMobile ? 22 : 18,
                               fontWeight: FontWeight.w600,
@@ -182,8 +187,9 @@ class AwesomeSnackbarContent extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         if (inMaterialBanner) {
-                          ScaffoldMessenger.of(context)
-                              .hideCurrentMaterialBanner();
+                          ScaffoldMessenger.of(
+                            context,
+                          ).hideCurrentMaterialBanner();
                           return;
                         }
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -201,7 +207,8 @@ class AwesomeSnackbarContent extends StatelessWidget {
                 Expanded(
                   child: Text(
                     message,
-                    style: messageTextStyle ??
+                    style:
+                        messageTextStyle ??
                         TextStyle(
                           fontSize: isMobile ? 14 : 16,
                           color: Colors.white,
@@ -247,6 +254,5 @@ class AwesomeSnackbarContent extends StatelessWidget {
   static ColorFilter? _getColorFilter(
     ui.Color? color,
     ui.BlendMode colorBlendMode,
-  ) =>
-      color == null ? null : ui.ColorFilter.mode(color, colorBlendMode);
+  ) => color == null ? null : ui.ColorFilter.mode(color, colorBlendMode);
 }
