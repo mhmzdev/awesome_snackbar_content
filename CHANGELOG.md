@@ -1,5 +1,8 @@
+## 0.1.8
+* SDK Updated Flutter: `3.35.0` Dart: `3.9.0` - [Issue # 52](https://github.com/mhmzdev/awesome_snackbar_content/issues/52)
+
 ## 0.1.7
-* SDK Updated `3.8.1`
+* SDK Updated Flutter: `3.29.0` Dart: `3.8.1`
 * Linters applied (MISC)
 
 ## 0.1.6
