@@ -29,3 +29,7 @@ coverage/
 .dart_tool/
 .packages
 build/
+
+# The Brigade
+.claude/brigade.local.md
+/stations/
